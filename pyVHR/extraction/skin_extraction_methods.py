@@ -93,7 +93,7 @@ class SkinExtractionFaceParsing():
             print('Downloading faceparsing model...')
             r = requests.get(url, allow_redirects=True)
             open(save_pth, 'wb').write(r.content)    
-        self.net.load_state_dict(torch.load(save_pth))
+        self.net.load_state_dict(torch.load(save_pth, map_location=torch.device(device)))
         self.net.eval()
         self.to_tensor = transforms.Compose([
             transforms.ToTensor(),
